@@ -1,29 +1,34 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import ParentCountUp from '@/components/ParentCountUp.vue'
+import ParentCountUp from '@/pages/ParentCountUp.vue'
 import TestParentTextArea from '@/pages/TestParentTextArea.vue'
+import RegistForm from '@/pages/RegistForm.vue'
+
+// router/index.tsはVue Routerを使ってページ遷移を管理するための設定ファイル
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL), // ヒストリーモードの設定
   routes: [
     {
       path: '/',
       name: 'home',
+      component: HomeView // このルートではParentCountUpコンポーネントを表示
+    },
+    {
+      path: '/testTextArea',
+      name: 'testTextArea',
+      component: TestParentTextArea
+    },
+    {
+      path: '/countUp',
+      name: 'countUp',
       component: ParentCountUp
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: HomeView
+      path: '/signUp',
+      name: 'signUp',
+      component: RegistForm
     },
-    {
-      path: '/test',
-      name: 'test',
-      component: TestParentTextArea
-    }
   ]
 })
 
