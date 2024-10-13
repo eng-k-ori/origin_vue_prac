@@ -1,18 +1,19 @@
-<script setup lang="ts">
-</script>
 <template>
   <div class="diva">
     <p>slotされ子コンポーネント</p>
     <div>
       <!-- この部分は親がデータを動的に渡すよ -->
-    <slot name="first"></slot>
+      <slot name="first"></slot>
     </div>
-    <slot name="second"></slot>
     <div>
-
+      <slot name="second"></slot>
     </div>
   </div>
 </template>
+<!-- ================================================================================================ -->
+<script setup lang="ts">
+</script>
+<!-- ================================================================================================ -->
 <style scoped>
 .diva{
   background-color: lightslategrey;

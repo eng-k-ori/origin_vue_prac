@@ -1,27 +1,34 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import ParentCountUp from './components/ParentCountUp.vue';
-</script>
+
+<!-- App.vueは最上位のルートコンポーネントで、すべての他のページやコンポーネントはこのコンポーネント内で表示される。
+ビューのテンプレートや基本的なレイアウトを定義する。 -->
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/countUp">CountUp</RouterLink>
+        <RouterLink to="/testTextArea">testTextArea</RouterLink>
+        <RouterLink to="/signUp">Regist</RouterLink>
       </nav>
     </div>
   </header>
   <!-- <ParentCountUp></ParentCountUp> -->
+  <!-- Vue Routerで指定されたルートに応じて表示されるコンポーネントがここに動的に挿入される。 -->
   <RouterView />
 </template>
-
+<!-- ================================================================================================ -->
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import ParentCountUp from './pages/ParentCountUp.vue';
+</script>
+<!-- ================================================================================================ -->
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
+  background-color: cadetblue;
 }
 
 .logo {
@@ -54,6 +61,7 @@ nav a:first-of-type {
   border: 0;
 }
 
+/* 画面幅が1024px以上の場合に適用されるCSSルールを定義 */
 @media (min-width: 1024px) {
   header {
     display: flex;

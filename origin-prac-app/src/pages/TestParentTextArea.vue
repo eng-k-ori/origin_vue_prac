@@ -1,16 +1,27 @@
 <template>
   <div class="dev1">
     <h1>ここはTestParentTextArea.vue</h1>
-    <input v-model="parentInputText" class='inputp' type="text" placeholder="親のv-modelのinputの初期値" @input="updateInputText"/>
-    <p>親のv-modelのinputタグの入力値:{{ parentInputText }}</p>
-    <button @click="parentInputTextButton">ボタン</button>
-    <!-- 1 -->
-    <input class='inputp' type="text" placeholder="親のref()のみのinputの初期値" @input="updateInputTRefText"/>
-    <p>親のref()のみのinputタグの入力値:{{ parentRefInputText }}</p>
-    <button @click="parentInputTRefTextButton">ボタン</button>
-    <!-- ======== ここから子の練習エリア ========== -->
-    <!-- :fooo:propsの親から渡すprops名はなんでも良い -->
-    <div>
+    <!-- 2 v-modelがあるので、@input="updateInputText"はなくても良い-->
+    <div class="div5">
+      <input
+      v-model="parentInputText"
+      class='inputp'
+      type="text"
+      placeholder="親のv-modelのinputの初期値"
+      @input="updateInputText"
+      />
+      <p>親のv-modelのinputタグの入力値:{{ parentInputText }}</p>
+      <button @click="parentInputTextButton">ボタン</button>
+    </div>
+    <div class="div5">
+      <!-- 1 -->
+      <input class='inputp' type="text" placeholder="親のref()のみのinputの初期値" @input="updateInputTRefText"/>
+      <p>親のref()のみのinputタグの入力値:{{ parentRefInputText }}</p>
+      <button @click="parentInputTRefTextButton">ボタン</button>
+    </div>
+    <div class="div5">
+      <!-- ======== ここから子の練習エリア ========== -->
+      <!-- :fooo:propsの親から渡すprops名はなんでも良い -->
       <TestChildPropsInput :foo="childPropsInputText" @input="updateChildPropsInputText"/>
       <button @click="clearChildPropsInputTextButton">子の親からpropsで受け取ったinputの値のクリア</button>
     </div>
@@ -27,11 +38,11 @@
 </template>
 <!-- ------------------------------------------ -->
 <script setup lang="ts">
-import TestChildPropsInput from '@/components/TestChildPropsInput.vue';
-import TestChildModelInput from '@/components/TestChildModelInput.vue';
-import TestChildModelTextArea from '@/components/TestChildModelTextArea.vue';
-import ClearChildModelTextAreaTextButton from '@/components/atoms/ClearChildModelTextAreaTextButton.vue';
-import {ref} from 'vue'
+import TestChildPropsInput from '@/components/textAreaComponents/TestChildPropsInput.vue';
+import TestChildModelInput from '@/components/textAreaComponents/TestChildModelInput.vue';
+import TestChildModelTextArea from '@/components/textAreaComponents/TestChildModelTextArea.vue';
+import ClearChildModelTextAreaTextButton from '@/components/textAreaComponents/ClearChildModelTextAreaTextButton.vue';
+import {ref, watch} from 'vue'
 
 // 親のv-modelの練習用の変数
 const parentInputText = ref<string>('')
@@ -54,7 +65,11 @@ const childModelTextAreaText = ref<string>('')
 function parentInputTextButton() {
   parentInputText.value = "v-modelこんにちは"
 }
-
+watch(parentInputText, (newValue, oldValue) => {
+  console.log('watchが呼ばれた')
+  console.log('newValue', newValue)
+  console.log('oldValue', oldValue)
+})
 // 親のref()のみのinputのボタン
 function parentInputTRefTextButton() {
   parentRefInputText.value = "refこんにちは"
@@ -110,6 +125,7 @@ function clearChildModelTextAreaTextButton(){
   padding-left: 40px;
   padding-right: 40px;
 }
+.div5 {border-bottom: 2px solid darkorange; /* 下線のみを引く */}
 </style>
 
 <!-- /*
@@ -147,4 +163,21 @@ v-modelを使わずに手動で双方向バインディングを実現するた�
 v-modelを使う場合
 v-model="parentInputText" で、フォーム要素とparentInputTextが双方向で自動的に同期するため、イベント処理や手
 動でのvalueの設定は不要。
+
+################################################################################################
+2
+要点
+v-model="parentInputText" を :parentInputText に書き換えると、双方向バインディングが無効になり、入力フィー
+ルドが単に parentInputText の値を表示するだけになる。入力時に parentInputText の値は更新されない。
+------------------------------------------------------------------------------------------------
+つまり、@input="updateInputText"がなくてもいい
+------------------------------------------------------------------------------------------------
+詳細な説明
+v-model は Vue.js における双方向バインディングを実現するためのディレクティブで、UIでの変更を自動的に変数に反映す
+る。
+v-model="parentInputText" の場合、parentInputText はユーザーの入力によってリアルタイムに更新される。
+具体的には、v-model は内部的に :value と @input イベントを組み合わせている。
+: (バインディングディレクティブ) を使った場合、:parentInputText となると、parentInputText はプロパティとして
+入力フィールドに反映されるが、ユーザーがそのフィールドに何か入力しても parentInputText 自体は更新されない。
+つまり、双方向のデータバインディングが機能しなくなる。
 */ -->
