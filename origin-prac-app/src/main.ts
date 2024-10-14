@@ -3,11 +3,11 @@ import { createApp } from 'vue' // Vueアプリの作成に必要な関数をイ
 import App from './App.vue' // メインのAppルートコンポーネントをインポート
 import BaseComponent from './components/countUpComponents/BaseComponent.vue'
 import router from './router' // ルーティングを管理するVue Routerのインポート
-
 // main.tsはアプリケーションのエントリーポイントで、Vueアプリケーションの初期化や、Vueインスタンスの作成とコンポーネントの登録を行う。
 
 // App.vueは最上位のルートコンポーネントで、ビューのテンプレートや基本的なレイアウトを定義する。
 const app = createApp(App)
+// Vuetify をアプリケーションに追加
 // 1 Vue Routerをアプリケーションに追加
 app.use(router)
 // 2 BaseComponentをグローバルコンポーネントとして登録
