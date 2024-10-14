@@ -2,6 +2,7 @@
 <template>
   <div>
   <h3>ここは計算エリア</h3>
+  <br />
   <input type="number" :value="props.firstInputNum" @input="updateFirstInputNum"/>
   +
   <input type="number" :value="props.secondInputNum" @input="updateSecondInputNum"/>

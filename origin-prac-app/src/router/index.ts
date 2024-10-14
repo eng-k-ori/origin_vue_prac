@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ParentCountUp from '@/pages/ParentCountUp.vue'
 import TestParentTextArea from '@/pages/TestParentTextArea.vue'
 import RegistForm from '@/pages/RegistForm.vue'
+import AsyncFetch from '@/pages/AsyncFetch.vue'
 
 // router/index.tsはVue Routerを使ってページ遷移を管理するための設定ファイル
 
@@ -28,6 +29,11 @@ const router = createRouter({
       path: '/signUp',
       name: 'signUp',
       component: RegistForm
+    },
+    {
+      path: '/asyncFetch',
+      name: 'asyncFetch',
+      component: AsyncFetch
     },
   ]
 })

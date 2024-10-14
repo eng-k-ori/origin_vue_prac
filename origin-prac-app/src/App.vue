@@ -11,6 +11,7 @@
         <RouterLink to="/countUp">CountUp</RouterLink>
         <RouterLink to="/testTextArea">testTextArea</RouterLink>
         <RouterLink to="/signUp">Regist</RouterLink>
+        <RouterLink to="/asyncFetch">AsyncFetch</RouterLink>
       </nav>
     </div>
   </header>
@@ -28,7 +29,7 @@ import ParentCountUp from './pages/ParentCountUp.vue';
 header {
   line-height: 1.5;
   max-height: 100vh;
-  background-color: cadetblue;
+  background-color: lightcyan;
 }
 
 .logo {
